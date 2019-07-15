@@ -31,10 +31,27 @@ let destroy = (id) => {
             }
         })
     })
+};
+
+let paginate = (start, count) => {
+    var options = {
+        sort: { _id: 1 },
+        lean: true,
+        page: start,
+        limit: count
+    };
+    console.log("Start : ", start, " Count : ", count);
+    return new Promise((resolve, reject) => {
+        Product.paginate({}, options, (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        })
+    })
 }
 
 module.exports = {
     save,
     all,
-    destroy
+    destroy,
+    paginate
 }
