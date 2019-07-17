@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 let express = require('express'),
     app = express(),
@@ -7,7 +8,8 @@ let express = require('express'),
     JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt,
     User = require('./database/user'),
-    path = require('path');
+    path = require('path'),
+    cors = require('cors');
 
 let jwtOptions = {};
 
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, './assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 passport.use(myStrategy)
+app.use(cors());
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);

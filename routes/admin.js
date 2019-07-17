@@ -3,6 +3,7 @@ let Gallery = require('../database/gallery');
 let Product = require('../database/product');
 let Cat = require('../database/cat');
 
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './assets/uploads')
