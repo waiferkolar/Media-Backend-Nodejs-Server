@@ -3,7 +3,7 @@ const Product = db.Product;
 
 let save = (obj) => {
     return new Promise((resolve, reject) => {
-        obj["since"] = new Date();
+        obj["since"] = Date.now();
         let product = new Product(obj);
         product.save((err, data) => {
             if (err) reject(err);
@@ -48,10 +48,19 @@ let paginate = (start, count) => {
         })
     })
 }
+let findProductById = (id) => {
+    return new Promise((resolve, reject) => {
+        Product.find({ "cat_id": id }, (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        })
+    })
+}
 
 module.exports = {
     save,
     all,
     destroy,
-    paginate
+    paginate,
+    findProductById
 }
