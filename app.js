@@ -1,4 +1,4 @@
-
+let formidable = require('express-formidable');
 require('dotenv').config();
 let express = require('express'),
     app = express(),
@@ -13,6 +13,7 @@ let express = require('express'),
 
 let seeder = require('./database/seeder');
 let db = require('./database/db');
+let Order = require('./database/order');
 
 // seeder.seedCat();
 // seeder.seedProduct();
@@ -20,7 +21,6 @@ let db = require('./database/db');
 // db.dropColle('products')
 //     .then(res => console.log(res))
 //     .catch(err => console.log(err));
-
 
 let jwtOptions = {};
 
@@ -37,7 +37,11 @@ let myStrategy = new JwtStrategy(jwtOptions, (payload, done) => {
             }
         })
         .catch(err => done(err, null));
-})
+});
+
+// Order.findOrderById(9)
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err));
 
 let userRoute = require("./routes/user")(express, jwt);
 let adminRoute = require('./routes/admin')(express, passport);
@@ -47,11 +51,12 @@ app.use(express.static(path.join(__dirname, './assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 passport.use(myStrategy);
-
+app.use(formidable());
 var corsOptions = {
     origin: 'http://178.128.25.33/',
     optionsSuccessStatus: 200
 }
+
 app.use(cors(corsOptions));
 
 app.use("/user", userRoute);

@@ -1,6 +1,6 @@
 let passgen = require('../helper/passgen');
 let User = require('../database/user');
-
+let Order = require('../database/order');
 module.exports = (express, jwt) => {
     let router = express.Router();
 
@@ -38,9 +38,30 @@ module.exports = (express, jwt) => {
                     .then(user => res.send({ con: true, msg: user }))
                     .catch(err => res.send({ con: false, msg: err }))
             }).catch(err => res.send({ con: false, msg: err }))
+    });
 
+    router.post('/order', (req, res) => {
+        let orderObj = {
+            'uid': req.fields.uid,
+            'ords': req.fields.ords
+        };
+        Order.save(orderObj)
+            .then(user => res.send({ con: true, msg: user }))
+            .catch(err => res.send({ con: false, msg: err }))
 
+    });
 
+    router.get('/order/history', (req, res) => {
+        Order.all()
+            .then(user => res.send({ con: true, msg: user }))
+            .catch(err => res.send({ con: false, msg: err }))
+    });
+
+    router.get('/order/detail/:id', (req, res) => {
+        let id = req.param('id');
+        Order.findOrderById(id)
+            .then(user => res.send({ con: true, msg: user }))
+            .catch(err => res.send({ con: false, msg: err }))
     })
 
     return router;

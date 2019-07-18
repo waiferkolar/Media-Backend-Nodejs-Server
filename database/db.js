@@ -14,6 +14,12 @@ let CatScheme = new Schema({
     since: { type: Date, require: true }
 });
 
+let OrderScheme = new Schema({
+    uid: { type: Number, required: true },
+    ords: { type: String, required: true },
+    since: { type: Date, require: true }
+});
+
 let ProductScheme = new Schema({
     cat_id: { type: Number, require: true },
     name: { type: String, require: true },
@@ -52,11 +58,14 @@ let Product = mongoose.model('product', ProductScheme);
 let User = mongoose.model('user', UserScheme);
 GalleryScheme.plugin(autoincrement.plugin, 'gallery');
 let Gallery = mongoose.model('gallery', GalleryScheme);
+OrderScheme.plugin(autoincrement.plugin, 'order');
+let Order = mongoose.model('order', OrderScheme);
 
 module.exports = {
     Cat,
     Product,
     User,
     Gallery,
-    dropColle
+    dropColle,
+    Order
 }
