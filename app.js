@@ -11,6 +11,17 @@ let express = require('express'),
     path = require('path'),
     cors = require('cors');
 
+let seeder = require('./database/seeder');
+let db = require('./database/db');
+
+// seeder.seedCat();
+// seeder.seedProduct();
+
+// db.dropColle('products')
+//     .then(res => console.log(res))
+//     .catch(err => console.log(err));
+
+
 let jwtOptions = {};
 
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -35,8 +46,13 @@ let guestRoute = require('./routes/guest')(express);
 app.use(express.static(path.join(__dirname, './assets')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-passport.use(myStrategy)
-app.use(cors());
+passport.use(myStrategy);
+
+var corsOptions = {
+    origin: 'http://178.128.25.33/',
+    optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);

@@ -32,7 +32,18 @@ let UserScheme = new Schema({
 
 let GalleryScheme = new Schema({
     name: { type: String, required: true }
-})
+});
+
+let dropColle = (colle) => {
+    let db = mongoose.connection;
+
+    return new Promise((resolve, reject) => {
+        db.dropCollection(colle, (err, result) => {
+            if (err) reject(err);
+            resolve(colle + " removed!");
+        })
+    })
+}
 
 let Cat = mongoose.model('category', CatScheme);
 ProductScheme.plugin(autoincrement.plugin, 'product');
@@ -46,5 +57,6 @@ module.exports = {
     Cat,
     Product,
     User,
-    Gallery
+    Gallery,
+    dropColle
 }

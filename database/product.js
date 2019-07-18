@@ -48,9 +48,18 @@ let paginate = (start, count) => {
         })
     })
 }
-let findProductById = (id) => {
+let findProductByCatId = (id) => {
     return new Promise((resolve, reject) => {
         Product.find({ "cat_id": id }, (err, result) => {
+            if (err) reject(err);
+            resolve(result);
+        })
+    })
+}
+
+let findProductById = (id) => {
+    return new Promise((resolve, reject) => {
+        Product.findById(id, (err, result) => {
             if (err) reject(err);
             resolve(result);
         })
@@ -62,5 +71,6 @@ module.exports = {
     all,
     destroy,
     paginate,
+    findProductByCatId,
     findProductById
 }
