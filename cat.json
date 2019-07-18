@@ -7,46 +7,46 @@
     {
         "id": "2",
         "name": "bikes",
-        "image": "bike.jpeg"
+        "image": "bike.jpg"
     },
     {
         "id": "3",
         "name": "computers",
-        "image": "computer.jpeg"
+        "image": "computer.jpg"
     },
     {
         "id": "4",
         "name": "drinks",
-        "image": "drink.jpg"
+        "image": "drinks.jpg"
     },
     {
         "id": "5",
         "name": "foods",
-        "image": "foods.jpeg"
+        "image": "food.jpg"
     },
     {
         "id": "6",
         "name": "furniture",
-        "image": "furniture.jpeg"
+        "image": "furniture.png"
     },
     {
         "id": "7",
         "name": "phones",
-        "image": "phone.jpeg"
+        "image": "phone.jpg"
     },
     {
         "id": "8",
         "name": "hotels",
-        "image": "hotel.jpeg"
+        "image": "hotel.jpg"
     },
     {
         "id": "9",
         "name": "shirts",
-        "image": "shirt.jpeg"
+        "image": "shirt.jpg"
     },
     {
         "id": "10",
         "name": "templates",
-        "image": "template.jpeg"
+        "image": "template.jpg"
     }
 ]
